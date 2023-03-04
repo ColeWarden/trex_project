@@ -134,3 +134,7 @@ func set_animation(anim_state: int):
 		animationPlayer.play("walk")
 	elif animation_state == ANIM.JUMP:
 		animationPlayer.play("jump")
+
+
+func _area_entered(area: Area2D) -> void:
+	print(area)

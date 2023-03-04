@@ -14,8 +14,8 @@ func _ready() -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+#func _process(delta: float) -> void:
+#	pass
 #	for device in devices:
 #		print(device, ": ", sign(Input.get_joy_axis(device, JOY_ANALOG_LX)))
 	#var horz_velocity = sign(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"))

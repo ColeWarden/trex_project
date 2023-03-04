@@ -1,22 +1,18 @@
 extends KinematicBody2D
 
 
-const MAX_HORZ_VELOCITY = 10.0
-const MAX_JUMP_VELOCITY = 500.0
+const MAX_HORZ_VELOCITY = 5.0
+const MAX_JUMP_VELOCITY = 9.0
 
-const HORZ_VELOCITY = 100.0
-const JUMP_VELOCITY = 500.0
+const HORZ_VELOCITY = 5.0
+const JUMP_VELOCITY = 9.0
 
 var controller_id: int = -1 setget set_controller_id
 var velocity: Vector2 = Vector2.ZERO
-var gravity: float = 10.0
+var gravity: float = 0.5
 var friction: float = 300.0
-var jump_ready: bool = true
-var jump_cooldown_dur: float = 0.1
-# Called when the node enters the scene tree for the first time.
 
-onready var jumpTimer: Timer = $JumpTimer
-
+onready var collisionShape2D: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
 	set_process(false)
@@ -28,38 +24,49 @@ func set_controller_id(value: int)-> void:
 
 
 func _process(delta: float) -> void:
-	var horz_velocity: float = 0.0
-	var vert_velocity: float = 0.0
+	var horz_dir: float = 0.0
 	
 	# Horz Movement
-	horz_velocity = sign(Input.get_joy_axis(controller_id, JOY_ANALOG_LX))
-	if horz_velocity:
-		velocity.x += HORZ_VELOCITY * delta
+	horz_dir = sign(Input.get_joy_axis(controller_id, JOY_ANALOG_LX))
+	if horz_dir != 0.0:
+		velocity.x += HORZ_VELOCITY * horz_dir
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
 	
 	# Vert Movement
 	# If jump is ready and B pressed 
-	if jump_ready and Input.is_joy_button_pressed(controller_id, JOY_XBOX_B):
-		velocity.y -= JUMP_VELOCITY * delta
-		set_jump_ready(false)
-	velocity.y += (gravity * delta)
+	velocity.y += gravity
+#	if $RayCast2D.is_colliding():
+#		velocity.y = 0.0
+#	var collision_pos: Vector2 = collisionShape2D.global_position
+#	var rectShape: RectangleShape2D = collisionShape2D.shape
+#	var extents: Vector2 = rectShape.extents
+#	var bottom_left_pos: Vector2 = collision_pos + Vector2(-extents.x, extents.y)
+#	var bottom_right_pos: Vector2 = collision_pos + Vector2(extents.x, extents.y)
+#	var slides: int = get_slide_count()
+#	var on_ground: bool = slides != 0
+#	for slide in slides:
+#		var collision: KinematicCollision2D = get_slide_collision(slide)
+#		var pos: Vector2 = collision.position + Vector2(8,8)
+#		var on_ground_tile: bool = false
+#		if pos.x < collision_pos.x:
+#			on_ground_tile = abs(bottom_left_pos.direction_to(pos).x) <= PI/4
+#		else:
+#			on_ground_tile = abs(bottom_right_pos.direction_to(pos).x) <= PI/4
+#		if !on_ground_tile:
+#			on_ground = false
+#			break
+#
+#	if is_on_floor():
+#		velocity.y = 0.0
+	#print(velocity)
+	
+	if Input.is_joy_button_pressed(controller_id, JOY_XBOX_B) and is_on_floor():
+		velocity.y = -JUMP_VELOCITY
+		#velocity.y -= JUMP_VELOCITY
 	
 	var clamped_x: float = clamp(velocity.x, -MAX_HORZ_VELOCITY, MAX_HORZ_VELOCITY)
 	var clamped_y: float = clamp(velocity.y, -MAX_JUMP_VELOCITY, MAX_JUMP_VELOCITY)
-	#print(clamped_y)
 	velocity = Vector2(clamped_x, clamped_y)
-	global_position += move_and_slide(velocity, Vector2.UP, false, 4, deg2rad(60))
-
-
-func set_jump_ready(value: bool)-> void:
-	jump_ready = value
-	if !jump_ready:
-		jumpTimer.start(jump_cooldown_dur)
-
-func _jump_ready()-> void:
-	set_jump_ready(true)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+	velocity = move_and_slide(velocity, Vector2.UP, true)
+	global_position += velocity

@@ -74,8 +74,9 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
-length = 2.0
+length = 3.0
 loop = true
+step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -95,7 +96,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
+"times": PoolRealArray( 0, 1.5, 3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 10.0, -10.0, 10.0 ]

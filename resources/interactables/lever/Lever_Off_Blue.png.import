@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/eddy_side.png-907372dc4d89ac40337a031133846b2f.stex"
+path="res://.import/Lever_Off_Blue.png-ee61b0f7bcc8b71e3251a6e886a650b6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/player/eddy_side.png"
-dest_files=[ "res://.import/eddy_side.png-907372dc4d89ac40337a031133846b2f.stex" ]
+source_file="res://resources/interactables/lever/Lever_Off_Blue.png"
+dest_files=[ "res://.import/Lever_Off_Blue.png-ee61b0f7bcc8b71e3251a6e886a650b6.stex" ]
 
 [params]
 

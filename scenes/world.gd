@@ -6,10 +6,15 @@ onready var packedPlayer: PackedScene = preload("res://scenes/player/Player.tscn
 
 func _ready() -> void:
 	devices = Input.get_connected_joypads()
-	for device in devices:
+	if devices.empty():
 		var inst: Node2D = packedPlayer.instance()
 		add_child(inst)
-		inst.set_controller_id(device)
+		inst.set_controller_id(-1)
+		inst.global_position = Vector2(64, 64)
+	else:
+		var inst: Node2D = packedPlayer.instance()
+		add_child(inst)
+		inst.set_controller_id(devices[0])
 		inst.global_position = Vector2(64, 64)
 
 

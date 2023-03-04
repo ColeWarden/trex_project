@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lever_Off_Blue.png-ee61b0f7bcc8b71e3251a6e886a650b6.stex"
+path="res://.import/lever.png-ae67ef6efdee57a1fbf6805c764c9fc2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/interactables/lever/Lever_Off_Blue.png"
-dest_files=[ "res://.import/Lever_Off_Blue.png-ee61b0f7bcc8b71e3251a6e886a650b6.stex" ]
+source_file="res://resources/interactables/lever/lever.png"
+dest_files=[ "res://.import/lever.png-ae67ef6efdee57a1fbf6805c764c9fc2.stex" ]
 
 [params]
 

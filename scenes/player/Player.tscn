@@ -100,8 +100,4 @@ position = Vector2( 0, -11 )
 [node name="InteractArea" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, -11 )
 
-[node name="DoubleJumpTimer" type="Timer" parent="."]
-
-[connection signal="timeout" from="DoubleJumpTimer" to="." method="_DoubleJumpTimer_timeout"]
-
 [editable path="InteractArea"]

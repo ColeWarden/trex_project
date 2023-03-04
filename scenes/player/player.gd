@@ -26,7 +26,7 @@ var double_jump_ready: bool = false
 onready var sprite: Sprite = $Sprite
 onready var collisionShape2D: CollisionShape2D = $CollisionShape2D
 onready var animationPlayer: AnimationPlayer = $AnimationPlayer
-onready var jumpTimer: Timer = $DoubleJumpTimer
+
 
 func _ready() -> void:
 	animationPlayer.playback_speed = 10.0
@@ -126,7 +126,3 @@ func set_animation(anim_state: int):
 		animationPlayer.play("walk")
 	elif animation_state == ANIM.JUMP:
 		animationPlayer.play("jump")
-
-
-func _DoubleJumpTimer_timeout() -> void:
-	double_jump_ready = true

@@ -6,7 +6,7 @@ func add_collision_tile(tile_pos: Vector2):
 
 
 func remove_collision_tile(tile_pos: Vector2):
-	set_cellv(tile_pos, 0)
+	set_cellv(tile_pos, -1)
 
 
 # Vector2(128, 96) -> Vector2(8, 6)

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/glitch-orchestral-funky-hip-hop-beat.mp3-dddbe7b6cc5f96047f9cd5c5b3bbfd21.mp3str"
+
+[deps]
+
+source_file="res://resources/audio/glitch-orchestral-funky-hip-hop-beat.mp3"
+dest_files=[ "res://.import/glitch-orchestral-funky-hip-hop-beat.mp3-dddbe7b6cc5f96047f9cd5c5b3bbfd21.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

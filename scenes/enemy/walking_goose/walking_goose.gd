@@ -14,6 +14,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float):
+	
 	var found_wall = is_on_wall()
 	var found_ledge = !ledgeCheck.is_colliding()
 	

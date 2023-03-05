@@ -275,7 +275,7 @@ position = Vector2( 0, 3 )
 texture = ExtResource( 18 )
 
 [node name="WalkingGoose" parent="YSort" instance=ExtResource( 19 )]
-position = Vector2( 506, 64 )
+position = Vector2( 621, 176 )
 speed = 100.0
 
 [node name="ProjectileGoose" parent="YSort" instance=ExtResource( 20 )]

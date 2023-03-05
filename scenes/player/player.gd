@@ -155,6 +155,9 @@ func set_animation(anim_state: int):
 
 
 func _die()-> void:
+	$"honk".volume_db = 20
+	$"honk".play()
+	$"heaven-ascend".play()
 	set_animation(ANIM.DEATH)
 
 

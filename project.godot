@@ -90,6 +90,11 @@ config/name="TRex"
 run/main_scene="res://scenes/World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalWorld="*res://scenes/World.tscn"
+Bgm="*res://resources/audio/bgm.tscn"
+
 [debug]
 
 settings/fps/force_fps=60

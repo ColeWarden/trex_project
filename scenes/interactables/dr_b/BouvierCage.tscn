@@ -231,14 +231,16 @@ wait_time = 0.1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchor_right = 1.0
+margin_right = 640.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -32.0
-margin_bottom = -32.0
+margin_top = 328.0
+margin_right = 640.0
+margin_bottom = 328.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="CanvasLayer"]

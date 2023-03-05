@@ -1,8 +1,9 @@
 extends Node2D
 
-
+var starting_pos: Vector2 = Vector2(400, 64)
 var devices: Array = []
 onready var packedPlayer: PackedScene = preload("res://scenes/player/Player.tscn")
+
 
 func _ready() -> void:
 	devices = Input.get_connected_joypads()
@@ -10,12 +11,12 @@ func _ready() -> void:
 		var inst: Node2D = packedPlayer.instance()
 		add_child(inst)
 		inst.set_controller_id(-1)
-		inst.global_position = Vector2(64, 64)
+		inst.global_position = starting_pos
 	else:
 		var inst: Node2D = packedPlayer.instance()
 		add_child(inst)
 		inst.set_controller_id(devices[0])
-		inst.global_position = Vector2(64, 64)
+		inst.global_position = starting_pos
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.

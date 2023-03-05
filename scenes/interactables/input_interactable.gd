@@ -9,6 +9,7 @@ export(String) var input_key: String
 
 
 func _ready() -> void:
+	._ready()
 	add_to_group(input_key)
 
 

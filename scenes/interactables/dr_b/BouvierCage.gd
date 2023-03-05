@@ -20,6 +20,7 @@ func set_color_mode(color: int)-> void:
 func bouvier_dance()-> void:
 	$Timer.start()
 	win_screen = true
+	$Particles2D.visible = true
 
 
 func _process(delta: float) -> void:

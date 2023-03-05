@@ -644,26 +644,17 @@ texture = ExtResource( 20 )
 [node name="WalkingGoose" parent="YSort/MUC" instance=ExtResource( 18 )]
 position = Vector2( 519, -48 )
 
-[node name="AnimatedSprite" parent="YSort/MUC/WalkingGoose" index="0"]
-frame = 1
-
 [node name="LedgeCheck" parent="YSort/MUC/WalkingGoose" index="2"]
 cast_to = Vector2( 0, 16 )
 
 [node name="WalkingGoose2" parent="YSort/MUC" instance=ExtResource( 18 )]
 position = Vector2( 797, -48 )
 
-[node name="AnimatedSprite" parent="YSort/MUC/WalkingGoose2" index="0"]
-frame = 1
-
 [node name="LedgeCheck" parent="YSort/MUC/WalkingGoose2" index="2"]
 cast_to = Vector2( 0, 16 )
 
 [node name="WalkingGoose3" parent="YSort/MUC" instance=ExtResource( 18 )]
 position = Vector2( 1074, -48 )
-
-[node name="AnimatedSprite" parent="YSort/MUC/WalkingGoose3" index="0"]
-frame = 1
 
 [node name="LedgeCheck" parent="YSort/MUC/WalkingGoose3" index="2"]
 cast_to = Vector2( 0, 16 )
@@ -672,9 +663,6 @@ cast_to = Vector2( 0, 16 )
 
 [node name="WalkingGoose" parent="YSort/EB" instance=ExtResource( 18 )]
 position = Vector2( 2819, -224 )
-
-[node name="AnimatedSprite" parent="YSort/EB/WalkingGoose" index="0"]
-frame = 1
 
 [node name="LedgeCheck" parent="YSort/EB/WalkingGoose" index="2"]
 cast_to = Vector2( 2, 74 )
@@ -771,6 +759,9 @@ shape = SubResource( 12 )
 [node name="BouvierCage" parent="YSort/Boss" instance=ExtResource( 28 )]
 position = Vector2( 4039, -1235 )
 input_key = "drb0"
+
+[node name="Particles2D" parent="YSort/Boss/BouvierCage" index="0"]
+position = Vector2( -63, 0 )
 
 [node name="Lever" parent="YSort/Boss" instance=ExtResource( 7 )]
 position = Vector2( 3960, -1025 )
@@ -935,6 +926,7 @@ layer = -1
 [editable path="YSort/Boss/FatGoose"]
 [editable path="YSort/Boss/FatGoose/HurtArea"]
 [editable path="YSort/Boss/FatGoose/DetectionArea"]
+[editable path="YSort/Boss/BouvierCage"]
 [editable path="YSort/Between_muc/ProjectileGoose"]
 [editable path="YSort/Between_muc/ProjectileGoose2"]
 [editable path="YSort/Between_muc/ProjectileGoose3"]

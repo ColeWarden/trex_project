@@ -1,10 +1,30 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/interactables/dr_b/BouvierCage.gd" type="Script" id=1]
 [ext_resource path="res://resources/enviroment/cage.png" type="Texture" id=2]
 [ext_resource path="res://resources/interactables/dr_b/chains.png" type="Texture" id=3]
 [ext_resource path="res://resources/interactables/dr_b/dr_b.png" type="Texture" id=4]
 [ext_resource path="res://theme.tres" type="Theme" id=5]
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0641026, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.871795, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 2
+emission_box_extents = Vector3( 200, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 5.0
+scale_random = 0.5
+scale_curve = SubResource( 5 )
+color = Color( 1, 0, 0, 1 )
+hue_variation = 1.0
+hue_variation_random = 1.0
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 2
@@ -180,6 +200,12 @@ tracks/6/keys = {
 position = Vector2( 323, 69 )
 script = ExtResource( 1 )
 
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, -20 )
+amount = 100
+lifetime = 5.0
+process_material = SubResource( 6 )
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
@@ -205,16 +231,14 @@ wait_time = 0.1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchor_right = 1.0
-margin_right = 640.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 328.0
-margin_right = 640.0
-margin_bottom = 328.0
+margin_top = -32.0
+margin_bottom = -32.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="CanvasLayer"]
@@ -226,5 +250,6 @@ rect_pivot_offset = Vector2( 72, 7 )
 theme = ExtResource( 5 )
 text = "You saved Dr. B!"
 align = 1
+percent_visible = 0.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

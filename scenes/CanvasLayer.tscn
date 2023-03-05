@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Retry:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.180392, 0.176471, 0.235294, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/Retry/HBoxContainer/Label:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "retry"
+length = 5.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Retry:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.180392, 0.176471, 0.235294, 0 ), Color( 0.180392, 0.176471, 0.235294, 0 ), Color( 0.0392157, 0.027451, 0.239216, 0.564706 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/Retry/HBoxContainer/Label:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
+root_node = NodePath("../..")
+anims/RESET = SubResource( 12 )
+anims/retry = SubResource( 11 )
+
+[node name="Retry" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0392157, 0.027451, 0.239216, 0.564706 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Retry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="Retry/HBoxContainer"]
+margin_right = 218.0
+margin_bottom = 360.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Retry/HBoxContainer"]
+margin_left = 222.0
+margin_top = 173.0
+margin_right = 417.0
+margin_bottom = 187.0
+text = "Press 'B' or 'Space' to continue"
+align = 1
+valign = 1
+
+[node name="Control2" type="Control" parent="Retry/HBoxContainer"]
+margin_left = 421.0
+margin_right = 640.0
+margin_bottom = 360.0
+size_flags_horizontal = 3

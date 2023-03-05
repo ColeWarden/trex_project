@@ -1,0 +1,141 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/areas/HurtArea.tscn" type="PackedScene" id=1]
+[ext_resource path="res://resources/collision/CollisionShape2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/enemy/fat_goose/fat_goose.png" type="Texture" id=3]
+[ext_resource path="res://scenes/enemy/fat_goose/fat_goose.gd" type="Script" id=4]
+[ext_resource path="res://scenes/areas/DetectorArea.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 11.0
+height = 28.0
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "hide"
+length = 6.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "honk"
+length = 6.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "jump_up"
+length = 6.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15, 16, 17 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "show"
+length = 6.0
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 10, 9, 8, 7, 6 ]
+}
+
+[sub_resource type="CircleShape2D" id=8]
+resource_local_to_scene = true
+radius = 233.019
+
+[node name="FatGoose" type="KinematicBody2D"]
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -10 )
+shape = SubResource( 1 )
+
+[node name="HurtArea" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -8 )
+
+[node name="CollisionShape2D" parent="HurtArea" index="0"]
+position = Vector2( 0, -5 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -37 )
+texture = ExtResource( 3 )
+hframes = 6
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/hide = SubResource( 4 )
+anims/honk = SubResource( 5 )
+anims/jump_up = SubResource( 6 )
+anims/show = SubResource( 7 )
+
+[node name="DetectionArea" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -13 )
+
+[node name="CollisionShape2D" parent="DetectionArea" index="0"]
+shape = SubResource( 8 )
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_area_entered"]
+
+[editable path="HurtArea"]
+[editable path="DetectionArea"]

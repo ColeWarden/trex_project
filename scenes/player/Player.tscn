@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://resources/player/rexy.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=2]
 [ext_resource path="res://scenes/areas/HitArea.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/areas/InteractArea.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/areas/DetectionArea.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=6]
 radius = 6.0
@@ -57,6 +58,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=9]
 resource_name = "ghost"
 length = 2.0
+loop = true
 step = 1.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -123,6 +125,9 @@ tracks/0/keys = {
 resource_local_to_scene = true
 radius = 10.0499
 
+[sub_resource type="CircleShape2D" id=10]
+resource_local_to_scene = true
+
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 0
 script = ExtResource( 2 )
@@ -156,6 +161,12 @@ position = Vector2( 0, -11 )
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
 shape = SubResource( 7 )
 
+[node name="DetectionArea" parent="." instance=ExtResource( 5 )]
+
+[node name="CollisionShape2D" parent="DetectionArea" index="0"]
+shape = SubResource( 10 )
+
 [connection signal="area_entered" from="HitArea" to="." method="_area_entered"]
 
 [editable path="InteractArea"]
+[editable path="DetectionArea"]

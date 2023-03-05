@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/world.gd" type="Script" id=1]
 [ext_resource path="res://resources/collision.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://resources/tiles/sheet0.png" type="Texture" id=14]
 [ext_resource path="res://scenes/CanvasLayer.tscn" type="PackedScene" id=15]
 [ext_resource path="res://resources/tiles/sky.png" type="Texture" id=16]
+[ext_resource path="res://resources/audio/bgm.tscn" type="PackedScene" id=17]
 [ext_resource path="res://resources/interactables/door/door1.png" type="Texture" id=18]
 [ext_resource path="res://scenes/enemy/walking_goose/WalkingGoose.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scenes/enemy/projectile_goose/ProjectileGoose.tscn" type="PackedScene" id=20]
@@ -252,6 +253,8 @@ margin_top = -734.0
 margin_right = 5056.0
 margin_bottom = 1259.0
 color = Color( 0, 0, 0, 1 )
+
+[node name="AudioStreamPlayer2D" parent="." instance=ExtResource( 17 )]
 
 [node name="Camera2D" parent="." instance=ExtResource( 10 )]
 

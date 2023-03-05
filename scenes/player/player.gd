@@ -156,6 +156,8 @@ func set_animation(anim_state: int):
 
 func _die()-> void:
 	set_animation(ANIM.DEATH)
+	$Honk.play()
+	$Ascend.play()
 
 
 func _ghost()-> void:

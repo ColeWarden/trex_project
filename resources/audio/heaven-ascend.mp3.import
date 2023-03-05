@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/heaven-ascend.mp3-c50318226556012a399ca5f1392dbad1.mp3str"
+
+[deps]
+
+source_file="res://resources/audio/heaven-ascend.mp3"
+dest_files=[ "res://.import/heaven-ascend.mp3-c50318226556012a399ca5f1392dbad1.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

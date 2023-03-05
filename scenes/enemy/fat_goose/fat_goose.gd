@@ -11,6 +11,8 @@ enum STATE {
 const ANIMATION_STATES: Array = ["honk", "hide", "jump", "slam"]
 var state: int = STATE.IDLE
 var first_player: Player = null
+var velocity: Vector2 = Vector2.ZERO
+var gravity: float = 10.0
 
 onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 
@@ -20,6 +22,9 @@ func _area_entered(area: Area2D) -> void:
 
 
 func _process(delta: float) -> void:
+	velocity.y += gravity
+	move_and_slide(velocity, Vector2.UP, false)
+	
 	if state == STATE.IDLE:
 		honk()
 

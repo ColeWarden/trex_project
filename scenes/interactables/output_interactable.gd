@@ -38,7 +38,8 @@ func get_input_interactables(group_name: String)-> Array:
 
 # Takes in an area node (preferably a interact.tscn node)
 func _is_player(area: Area2D)-> bool:
-	return area.get_parent() is Player
+	return true
+	#return area.get_parent() is Player
 
 
 # If player collides with this object

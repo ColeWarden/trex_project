@@ -13,6 +13,10 @@ resource_local_to_scene = true
 radius = 11.0
 height = 28.0
 
+[sub_resource type="CircleShape2D" id=8]
+resource_local_to_scene = true
+radius = 233.019
+
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
@@ -97,10 +101,6 @@ tracks/0/keys = {
 "values": [ 11, 10, 9, 8, 7, 6 ]
 }
 
-[sub_resource type="CircleShape2D" id=8]
-resource_local_to_scene = true
-radius = 233.019
-
 [node name="FatGoose" type="KinematicBody2D"]
 script = ExtResource( 4 )
 
@@ -116,6 +116,12 @@ position = Vector2( 0, -5 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
+[node name="DetectionArea" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -13 )
+
+[node name="CollisionShape2D" parent="DetectionArea" index="0"]
+shape = SubResource( 8 )
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -37 )
 texture = ExtResource( 3 )
@@ -128,12 +134,6 @@ anims/hide = SubResource( 4 )
 anims/honk = SubResource( 5 )
 anims/jump_up = SubResource( 6 )
 anims/show = SubResource( 7 )
-
-[node name="DetectionArea" parent="." instance=ExtResource( 5 )]
-position = Vector2( 0, -13 )
-
-[node name="CollisionShape2D" parent="DetectionArea" index="0"]
-shape = SubResource( 8 )
 
 [connection signal="area_entered" from="DetectionArea" to="." method="_area_entered"]
 

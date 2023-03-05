@@ -13,7 +13,7 @@ var mode: int = MODE.IDLE
 
 onready var packedPlayer: PackedScene = preload("res://scenes/player/Player.tscn")
 onready var ySort: YSort = $YSort
-onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+onready var animationPlayer: AnimationPlayer = $CanvasLayer/AnimationPlayer
 
 func _ready() -> void:
 	pause_mode = Node.PAUSE_MODE_PROCESS
@@ -103,6 +103,7 @@ func _process(delta: float) -> void:
 
 func reset()-> void:
 	set_mode_idle()
+	mode == MODE.IDLE
 	animationPlayer.play("RESET")
 	get_tree().paused = false
 	var players: Array = get_group_nodes("player")

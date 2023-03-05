@@ -162,6 +162,7 @@ position = Vector2( 0, -11 )
 shape = SubResource( 7 )
 
 [node name="DetectionArea" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -11 )
 
 [node name="CollisionShape2D" parent="DetectionArea" index="0"]
 shape = SubResource( 10 )

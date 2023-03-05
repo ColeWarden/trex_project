@@ -167,4 +167,5 @@ func _area_entered(area) -> void:
 	if parent is Checkpoint:
 		parent.set_current_checkpoint()
 	else:
+		_ghost()
 		emit_signal("die", self)

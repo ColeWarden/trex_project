@@ -7,14 +7,14 @@ export var max_offset = Vector2(100, 75)
 export var max_roll = 0.1  
 
 var trauma = 0.0  
-var trauma_power = 2  
+var trauma_power = 2 
+ 
+#var to_pos: Vector2 = Vector2.ZERO
 
 onready var hurtAreas: Array = [$HurtArea, $HurtArea2, $HurtArea3, $HurtArea4]
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("space"):
-		trauma = 0.5
 	if trauma:
 		trauma = max(trauma - decay * delta, 0)
 		shake()
@@ -23,13 +23,13 @@ func _process(delta: float) -> void:
 		players = get_group_nodes("player")
 		return
 	
-	var to_pos: Vector2 = Vector2.ZERO
+	var local_pos: Vector2 = Vector2.ZERO
 	for player in players:
 		var player_pos: Vector2 = player.global_position
-		if to_pos.x < player_pos.x:
-			to_pos = player_pos
+		if local_pos.x < player_pos.x:
+			local_pos = player_pos
 	
-	global_position = to_pos
+	global_position = lerp(global_position, local_pos, delta * 4.0)
 
 
 func set_shake_power(power: float)-> void:

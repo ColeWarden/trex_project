@@ -56,6 +56,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 1, -24 )
 frames = SubResource( 9 )
+frame = 3
 playing = true
 
 [connection signal="area_entered" from="HurtArea" to="." method="_on_HurtArea_area_entered"]

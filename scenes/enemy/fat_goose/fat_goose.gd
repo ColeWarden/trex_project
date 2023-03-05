@@ -28,6 +28,7 @@ func _area_entered(area: Area2D) -> void:
 func _process(delta: float) -> void:
 	if first_player:
 		velocity.x += global_position.direction_to(first_player.global_position).x
+		
 		velocity.x = clamp(velocity.x, -100, 100)
 		face_player()
 		if !is_on_floor():

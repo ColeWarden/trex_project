@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/interactables/dr_b/BouvierCage.gd" type="Script" id=1]
 [ext_resource path="res://resources/enviroment/cage.png" type="Texture" id=2]
 [ext_resource path="res://resources/interactables/dr_b/chains.png" type="Texture" id=3]
 [ext_resource path="res://resources/interactables/dr_b/dr_b.png" type="Texture" id=4]
+[ext_resource path="res://theme.tres" type="Theme" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 2
@@ -204,14 +205,16 @@ wait_time = 0.1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchor_right = 1.0
+margin_right = 640.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -32.0
-margin_bottom = -32.0
+margin_top = 328.0
+margin_right = 640.0
+margin_bottom = 328.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="CanvasLayer"]
@@ -220,8 +223,8 @@ margin_top = 148.0
 margin_right = 396.0
 margin_bottom = 162.0
 rect_pivot_offset = Vector2( 72, 7 )
+theme = ExtResource( 5 )
 text = "You saved Dr. B!"
 align = 1
-percent_visible = 0.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

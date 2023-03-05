@@ -1,6 +1,8 @@
 class_name Player
 extends KinematicBody2D
 
+signal die(_self)
+
 enum ANIM {
 	IDLE,
 	WALK,
@@ -24,7 +26,6 @@ var friction: float = 30.0
 var animation_state: int = ANIM.IDLE
 var jump_button_held: bool = false
 var double_jump_ready: bool = false
-var jump_timer: float = 0.0
 
 onready var sprite: Sprite = $Sprite
 onready var collisionShape2D: CollisionShape2D = $CollisionShape2D
@@ -35,11 +36,22 @@ func _ready() -> void:
 	animationPlayer.playback_speed = 10.0
 
 
+func reset()-> void:
+	set_animation(ANIM.IDLE)
+	velocity = Vector2.ZERO
+	double_jump_ready = false
+	jump_button_held = false
+
+
 func set_controller_id(value: int)-> void:
 	controller_id = value
 
 
 func _physics_process(delta: float) -> void:
+	if animation_state == ANIM.DEATH or animation_state == ANIM.GHOST:
+		global_position.y -= delta * 50.0
+		return
+	
 	# Horz Movement
 	velocity.x = _calculate_horz_movement(velocity.x, delta)
 	
@@ -51,11 +63,6 @@ func _physics_process(delta: float) -> void:
 	velocity = Vector2(clamped_x, clamped_y)
 	velocity = move_and_slide(velocity, Vector2.UP, true)
 	global_position += velocity
-	
-	if Input.is_action_just_pressed("space"):
-		var world: Node2D = get_tree().get_nodes_in_group("world").front()
-		var proj: Projectile = world.create_projectile(get_local_mouse_position(), 100.0)
-		proj.global_position = global_position
 
 
 func _calculate_horz_movement(velocity_x: float, delta: float)-> float:
@@ -155,5 +162,9 @@ func _ghost()-> void:
 	set_animation(ANIM.GHOST)
 
 
-func _area_entered(area: Area2D) -> void:
-	_die()
+func _area_entered(area) -> void:
+	var parent = area.get_parent()
+	if parent is Checkpoint:
+		parent.set_current_checkpoint()
+	else:
+		emit_signal("die", self)

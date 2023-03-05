@@ -1,26 +1,43 @@
 extends Node2D
 
+enum MODE {
+	IDLE,
+	RETRY,
+}
+
 const packedProjectile: PackedScene = preload("res://scenes/projectile/Projectile.tscn")
 
 var starting_pos: Vector2 = Vector2(400, 64)
 var devices: Array = []
+var mode: int = MODE.IDLE
 
 onready var packedPlayer: PackedScene = preload("res://scenes/player/Player.tscn")
 onready var ySort: YSort = $YSort
-
+onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
+	_init_pause_modes()
 	devices = Input.get_connected_joypads()
-	if devices.empty():
+	devices.resize(2)
+	var keyboard_index: int = -1
+	for i in devices.size():
 		var inst: Node2D = packedPlayer.instance()
 		add_child(inst)
-		inst.set_controller_id(-1)
+		if i == 0:
+			inst.sprite.texture = load("res://resources/player/eddy.png")
+		else:
+			inst.sprite.texture = load("res://resources/player/rexy.png")
+		if devices[i] == null:
+			inst.set_controller_id(keyboard_index)
+			keyboard_index -= 1
+		else:
+			inst.set_controller_id(devices[i])
 		inst.global_position = starting_pos
-	else:
-		var inst: Node2D = packedPlayer.instance()
-		add_child(inst)
-		inst.set_controller_id(devices[0])
-		inst.global_position = starting_pos
+		inst.connect("die", self, "_player_died")
+
+
+func _init_pause_modes()-> void:
+	pause_mode = Node.PAUSE_MODE_PROCESS
 
 
 func get_ySort()-> YSort:
@@ -35,13 +52,59 @@ func create_projectile(direction: Vector2, spd: float)-> Projectile:
 	return inst
 
 
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
-#	for device in devices:
-#		print(device, ": ", sign(Input.get_joy_axis(device, JOY_ANALOG_LX)))
-	#var horz_velocity = sign(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"))
-	#print(horz_velocity)
+func _player_died(player_id: Player)-> void:
+	player_id.pause_mode = Node.PAUSE_MODE_PROCESS
+	player_id._die()
+	ySort.pause_mode = Node.PAUSE_MODE_STOP
+	get_tree().paused = true
+	set_mode_retry()
 
-#func _input(event: InputEvent) -> void:
-#	print(event)
+
+func set_mode_retry()-> void:
+	mode = MODE.RETRY
+	animationPlayer.play("retry")
+	set_player_pause_mode(PAUSE_MODE_PROCESS)
+
+
+func set_mode_idle()-> void:
+	mode = MODE.IDLE
+	animationPlayer.play("RESET")
+	set_player_pause_mode(PAUSE_MODE_INHERIT)
+
+
+func set_player_pause_mode(pause: int)-> void:
+	var players: Array = get_group_nodes("player")
+	for player in players:
+		player.pause_mode = pause
+
+
+func get_group_nodes(group: String)-> Array:
+	return get_tree().get_nodes_in_group(group)
+
+
+func get_current_checkpoint()-> Checkpoint:
+	var checkpoints: Array = get_group_nodes("checkpoint")
+	for checkpoint in checkpoints:
+		if checkpoint.current_checkpoint:
+			return checkpoint
+	return null
+
+
+func _process(delta: float) -> void:
+	if mode == MODE.RETRY:
+		var players: Array = get_group_nodes("player")
+		for player in players:
+			if player._get_jump_input():
+				reset()
+
+func reset()-> void:
+	set_mode_idle()
+	var players: Array = get_group_nodes("player")
+	var check: Checkpoint = get_current_checkpoint()
+	var spawn_pos: Vector2 = starting_pos
+	if check:
+		spawn_pos = check.global_position
+	
+	for player in players:
+		player.global_position = spawn_pos
+		player.reset()

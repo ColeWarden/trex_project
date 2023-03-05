@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=1]
+[ext_resource path="res://scenes/areas/HurtArea.tscn" type="PackedScene" id=2]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2( 251, 65 )
+current = true
+script = ExtResource( 1 )
+
+[node name="HurtArea" type="Area2D" parent="." instance=ExtResource( 2 )]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="HurtArea2" type="Area2D" parent="." instance=ExtResource( 2 )]
+rotation = 3.14159
+collision_layer = 2
+collision_mask = 0
+
+[node name="HurtArea3" type="Area2D" parent="." instance=ExtResource( 2 )]
+rotation = 1.5708
+collision_layer = 2
+collision_mask = 0
+
+[node name="HurtArea4" type="Area2D" parent="." instance=ExtResource( 2 )]
+rotation = -1.5708
+collision_layer = 2
+collision_mask = 0

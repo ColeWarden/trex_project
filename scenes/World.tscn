@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/world.gd" type="Script" id=1]
 [ext_resource path="res://resources/collision.png" type="Texture" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/interactables/lever/Lever.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/enemy/fat_goose/FatGoose.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/CollisionMap.gd" type="Script" id=9]
-[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=10]
+[ext_resource path="res://scenes/Camera2D.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/areas/HurtArea.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/interactables/key/Key.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/interactables/locked_door/LockedDoor.tscn" type="PackedScene" id=13]
@@ -174,9 +174,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 0/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 323.5, 10 )
-
 [node name="World" type="Node2D" groups=["world"]]
 pause_mode = 2
 script = ExtResource( 1 )
@@ -256,43 +253,8 @@ margin_right = 5056.0
 margin_bottom = 1259.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 251, 65 )
-current = true
-script = ExtResource( 10 )
-
-[node name="HurtArea" parent="Camera2D" instance=ExtResource( 11 )]
-monitoring = false
-
-[node name="CollisionShape2D" parent="Camera2D/HurtArea" index="0"]
-position = Vector2( -1.5, -193 )
-shape = SubResource( 10 )
-
-[node name="HurtArea2" parent="Camera2D" instance=ExtResource( 11 )]
-rotation = 3.14159
-
-[node name="CollisionShape2D" parent="Camera2D/HurtArea2" index="0"]
-position = Vector2( -1.5, -193 )
-shape = SubResource( 10 )
-
-[node name="HurtArea3" parent="Camera2D" instance=ExtResource( 11 )]
-rotation = 1.5708
-
-[node name="CollisionShape2D" parent="Camera2D/HurtArea3" index="0"]
-position = Vector2( -1, -333 )
-shape = SubResource( 10 )
-
-[node name="HurtArea4" parent="Camera2D" instance=ExtResource( 11 )]
-rotation = -1.5708
-
-[node name="CollisionShape2D" parent="Camera2D/HurtArea4" index="0"]
-position = Vector2( -1, -333 )
-shape = SubResource( 10 )
+[node name="Camera2D" parent="." instance=ExtResource( 10 )]
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 15 )]
 
 [editable path="YSort/LockedDoor"]
-[editable path="Camera2D/HurtArea"]
-[editable path="Camera2D/HurtArea2"]
-[editable path="Camera2D/HurtArea3"]
-[editable path="Camera2D/HurtArea4"]

@@ -8,6 +8,7 @@ onready var lockSprite: Sprite = $Lock
 func _ready() -> void:
 	._ready()
 	lockSprite = $Lock
+	receive_active(false)
 	$AnimationPlayer.playback_speed = 10.0
 
 
@@ -16,18 +17,8 @@ func set_color_mode(color: int)-> void:
 	get_node("Lock").modulate = COLORS[color_mode]
 
 
-# Override, called by output_interactables
-func receive_active(value)-> void:
-	pass
-
-
 func unlock_door(value: bool)-> void:
-	var collisionTileMap: TileMap = get_collisionTileMap()
-	for tile_pos in door_tiles:
-		if value:
-			collisionTileMap.remove_collision_tile(tile_pos)
-		else:
-			collisionTileMap.add_collision_tile(tile_pos)
+	receive_active(value)
 	play_lock_animation()
 
 

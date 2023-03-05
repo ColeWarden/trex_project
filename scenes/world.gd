@@ -1,8 +1,12 @@
 extends Node2D
 
+const packedProjectile: PackedScene = preload("res://scenes/projectile/Projectile.tscn")
+
 var starting_pos: Vector2 = Vector2(400, 64)
 var devices: Array = []
+
 onready var packedPlayer: PackedScene = preload("res://scenes/player/Player.tscn")
+onready var ySort: YSort = $YSort
 
 
 func _ready() -> void:
@@ -17,6 +21,18 @@ func _ready() -> void:
 		add_child(inst)
 		inst.set_controller_id(devices[0])
 		inst.global_position = starting_pos
+
+
+func get_ySort()-> YSort:
+	return ySort
+
+
+func create_projectile(direction: Vector2, spd: float)-> Projectile:
+	var inst: Projectile = packedProjectile.instance()
+	ySort.add_child(inst)
+	inst.set_direction(direction)
+	inst.set_speed(spd)
+	return inst
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.

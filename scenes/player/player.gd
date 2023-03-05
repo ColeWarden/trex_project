@@ -4,7 +4,9 @@ extends KinematicBody2D
 enum ANIM {
 	IDLE,
 	WALK,
-	JUMP
+	JUMP,
+	DEATH,
+	GHOST
 }
 
 const DEAD_ZONE_LIMIT = 0.5
@@ -49,6 +51,11 @@ func _physics_process(delta: float) -> void:
 	velocity = Vector2(clamped_x, clamped_y)
 	velocity = move_and_slide(velocity, Vector2.UP, true)
 	global_position += velocity
+	
+	if Input.is_action_just_pressed("space"):
+		var world: Node2D = get_tree().get_nodes_in_group("world").front()
+		var proj: Projectile = world.create_projectile(get_local_mouse_position(), 100.0)
+		proj.global_position = global_position
 
 
 func _calculate_horz_movement(velocity_x: float, delta: float)-> float:
@@ -134,7 +141,19 @@ func set_animation(anim_state: int):
 		animationPlayer.play("walk")
 	elif animation_state == ANIM.JUMP:
 		animationPlayer.play("jump")
+	elif animation_state == ANIM.DEATH:
+		animationPlayer.play("death")
+	elif animation_state == ANIM.GHOST:
+		animationPlayer.play("ghost")
+
+
+func _die()-> void:
+	set_animation(ANIM.DEATH)
+
+
+func _ghost()-> void:
+	set_animation(ANIM.GHOST)
 
 
 func _area_entered(area: Area2D) -> void:
-	print(area)
+	_die()

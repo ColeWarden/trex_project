@@ -12,8 +12,10 @@ func receive_active(value)-> void:
 	for tile_pos in door_tiles:
 		if value:
 			collisionTileMap.remove_collision_tile(tile_pos)
+			set_sprite_mod_a(0.3)
 		else:
 			collisionTileMap.add_collision_tile(tile_pos)
+			set_sprite_mod_a(1.0)
 
 
 func get_collisionTileMap()-> TileMap:

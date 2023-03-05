@@ -22,5 +22,9 @@ func set_sprite_frame(frame: int)-> void:
 	sprite.frame = frame
 
 
+func set_sprite_mod_a(mod_a: float)-> void:
+	sprite.modulate.a = mod_a
+
+
 func set_color_mode(color: int)-> void:
 	sprite.modulate = COLORS[color]

@@ -8,8 +8,8 @@ Input interactable recieve key from Output interactable; is used for doors, plat
 export(String) var input_key: String
 
 
-func _ready() -> void:
-	._ready()
+func init() -> void:
+	.init()
 	add_to_group(input_key)
 
 

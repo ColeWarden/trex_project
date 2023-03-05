@@ -10,8 +10,8 @@ export(String) var output_key: String
 
 onready var interactableArea: Area2D = $InteractableArea
 
-func _ready() -> void:
-	._ready()
+func init() -> void:
+	.init()
 	var _err = interactableArea.connect("area_entered", self, "interact_area_entered")
 	_err = interactableArea.connect("area_exited", self, "interact_area_exited")
 	yield(get_tree(), "idle_frame")

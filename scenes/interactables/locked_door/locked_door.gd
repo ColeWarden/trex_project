@@ -5,8 +5,8 @@ extends Door
 onready var lockSprite: Sprite = $Lock
 
 
-func _ready() -> void:
-	._ready()
+func init() -> void:
+	.init()
 	lockSprite = $Lock
 	receive_active(false)
 	$AnimationPlayer.playback_speed = 10.0

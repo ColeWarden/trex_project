@@ -16,7 +16,7 @@ onready var ySort: YSort = $YSort
 onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-	_init_pause_modes()
+	pause_mode = Node.PAUSE_MODE_PROCESS
 	devices = Input.get_connected_joypads()
 	devices.resize(2)
 	var keyboard_index: int = -1
@@ -34,10 +34,13 @@ func _ready() -> void:
 			inst.set_controller_id(devices[i])
 		inst.global_position = starting_pos
 		inst.connect("die", self, "_player_died")
+	init_interactable()
 
 
-func _init_pause_modes()-> void:
-	pause_mode = Node.PAUSE_MODE_PROCESS
+func init_interactable()-> void:
+	var interactables: Array = get_group_nodes("interactable")
+	for i in interactables:
+		i.init()
 
 
 func get_ySort()-> YSort:
@@ -97,8 +100,11 @@ func _process(delta: float) -> void:
 			if player._get_jump_input():
 				reset()
 
+
 func reset()-> void:
 	set_mode_idle()
+	animationPlayer.play("RESET")
+	get_tree().paused = false
 	var players: Array = get_group_nodes("player")
 	var check: Checkpoint = get_current_checkpoint()
 	var spawn_pos: Vector2 = starting_pos

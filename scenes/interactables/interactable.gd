@@ -14,7 +14,10 @@ export(COLOR) var color_mode: int = COLOR.RED
 
 onready var sprite: Sprite = $Sprite
 
-func _ready() -> void:
+func _ready():
+	add_to_group("interactable")
+
+func init() -> void:
 	set_color_mode(color_mode)
 
 

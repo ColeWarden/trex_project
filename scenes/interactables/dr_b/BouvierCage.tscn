@@ -220,7 +220,7 @@ margin_top = 148.0
 margin_right = 396.0
 margin_bottom = 162.0
 rect_pivot_offset = Vector2( 72, 7 )
-text = "You saved Dr. Bouvier!"
+text = "You saved Dr. B!"
 align = 1
 percent_visible = 0.0
 

@@ -29,8 +29,8 @@ func shoot_projectile(direction: Vector2, spd: float)-> void:
 	if !world:
 		world = get_world()
 	var inst: Projectile = world.create_projectile(direction, spd)
-	var offset = Vector2(8, -12)
-	inst.global_position = global_position + offset
+	#var offset = Vector2(8, -12)
+	inst.global_position = global_position - Vector2(0,12)#+ Vector2(offset.x, offset.y)
 
 
 func start_animation()-> void:

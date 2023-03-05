@@ -10,6 +10,9 @@ onready var sprite: Sprite = $Sprite
 func set_direction(dir: Vector2)-> void:
 	direction = dir.normalized()
 	sprite.look_at(dir + global_position)
+	
+	if direction.x < 0:
+		sprite.flip_h = true
 	update_velocity(direction, speed)
 
 

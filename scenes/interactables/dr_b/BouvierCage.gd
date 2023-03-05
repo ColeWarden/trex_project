@@ -13,6 +13,10 @@ func receive_active(_value)-> void:
 	$AnimationPlayer.play("default")
 
 
+func set_color_mode(color: int)-> void:
+	pass
+
+
 func bouvier_dance()-> void:
 	$Timer.start()
 	win_screen = true
@@ -22,7 +26,7 @@ func _process(delta: float) -> void:
 	if !win_screen:
 		return
 	c += delta
-	$CanvasLayer/Label.rect_rotation += sin(c * 10.0) * 15.0
+	$CanvasLayer/Label.rect_rotation += sin(c * 10.0) * 10.0
 	$CanvasLayer/Label.visible_characters += 1
 
 

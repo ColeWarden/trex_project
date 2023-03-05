@@ -21,9 +21,10 @@ func _ready() -> void:
 
 # If player collides with this object
 func interact_area_entered(area: Area2D) -> void:
-	if mode == MODE.IDLE:
-		if _is_player(area):
-			set_player(area.get_parent())
+	if area.get_parent() is Player:
+		if mode == MODE.IDLE:
+			if _is_player(area):
+				set_player(area.get_parent())
 
 
 func set_player(player: Node2D):
@@ -42,7 +43,7 @@ func _process(delta: float) -> void:
 		return
 	
 	var target_pos: Vector2 = target.global_position
-	var key_offset: Vector2
+	var key_offset = Vector2(0,0)
 	if mode == MODE.PLAYER:
 		key_offset = Vector2(0, -48)
 	elif mode == MODE.DOOR:

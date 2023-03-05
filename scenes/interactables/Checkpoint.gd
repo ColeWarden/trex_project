@@ -14,7 +14,7 @@ func set_current_checkpoint()-> void:
 		checkpoint.current_checkpoint = false
 		checkpoint.modulate.a = 1.0
 	current_checkpoint = true
-	modulate.a = 4.0
+	modulate.a = 1.5
 
 
 func get_group_nodes(group: String)-> Array:

@@ -214,4 +214,14 @@ margin_top = -32.0
 margin_bottom = -32.0
 color = Color( 0, 0, 0, 1 )
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_left = 252.0
+margin_top = 148.0
+margin_right = 396.0
+margin_bottom = 162.0
+rect_pivot_offset = Vector2( 72, 7 )
+text = "You saved Dr. Bouvier!"
+align = 1
+percent_visible = 0.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

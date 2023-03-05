@@ -7,7 +7,7 @@ enum MODE {
 
 const packedProjectile: PackedScene = preload("res://scenes/projectile/Projectile.tscn")
 
-var starting_pos: Vector2 = Vector2(400, 64)
+var starting_pos: Vector2 = Vector2(3200, -1060)
 var devices: Array = []
 var mode: int = MODE.IDLE
 

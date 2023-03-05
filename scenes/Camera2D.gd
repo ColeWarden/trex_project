@@ -30,6 +30,7 @@ func _process(delta: float) -> void:
 			local_pos = player_pos
 	
 	global_position = lerp(global_position, local_pos, delta * 4.0)
+	global_position.x = max(global_position.x, 320)
 
 
 func set_shake_power(power: float)-> void:

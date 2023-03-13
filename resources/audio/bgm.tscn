@@ -2,6 +2,5 @@
 
 [ext_resource path="res://resources/audio/glitch-orchestral-funky-hip-hop-beat.mp3" type="AudioStream" id=1]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 stream = ExtResource( 1 )
-autoplay = true

@@ -18,6 +18,7 @@ func set_color_mode(color: int)-> void:
 
 
 func unlock_door(value: bool)-> void:
+	active_count = 0
 	receive_active(value)
 	play_lock_animation()
 

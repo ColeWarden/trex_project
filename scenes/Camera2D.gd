@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	local_pos.y = local_pos.y / players.size()
 
 	
-	global_position = lerp(global_position, local_pos, delta * 4.0)
+	global_position = lerp(global_position, local_pos, delta * 3.0)
 	global_position.x = max(global_position.x, 320)
 
 

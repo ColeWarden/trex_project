@@ -775,14 +775,6 @@ input_key = "drb0"
 visible = false
 position = Vector2( -63, 0 )
 
-[node name="ColorRect" parent="YSort/Boss/BouvierCage/CanvasLayer" index="0"]
-margin_right = 0.0
-
-[node name="ColorRect2" parent="YSort/Boss/BouvierCage/CanvasLayer" index="1"]
-margin_top = -32.0
-margin_right = 0.0
-margin_bottom = -32.0
-
 [node name="Lever" parent="YSort/Boss" instance=ExtResource( 7 )]
 position = Vector2( 3960, -1025 )
 color_mode = 0

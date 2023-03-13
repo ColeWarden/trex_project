@@ -26,8 +26,11 @@ func _process(delta: float) -> void:
 	var local_pos: Vector2 = Vector2.ZERO
 	for player in players:
 		var player_pos: Vector2 = player.global_position
+		local_pos.y += player_pos.y
 		if local_pos.x < player_pos.x:
-			local_pos = player_pos
+			local_pos.x = player_pos.x
+	local_pos.y = local_pos.y / players.size()
+
 	
 	global_position = lerp(global_position, local_pos, delta * 4.0)
 	global_position.x = max(global_position.x, 320)

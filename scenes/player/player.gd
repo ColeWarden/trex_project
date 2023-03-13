@@ -127,17 +127,23 @@ func _calculate_jump_movement(velocity_y: float, _delta: float)-> float:
 
 
 func _get_jump_input()-> bool:
-	if controller_id != -1:
-		return Input.is_joy_button_pressed(controller_id, JOY_XBOX_B)
-	else:
-		return Input.is_action_pressed("space")
+	if controller_id == -1:
+		return Input.is_action_pressed("space") or Input.is_action_pressed("w")
+	elif controller_id == -2:
+		return Input.is_action_pressed("enter")
+	elif controller_id != -1:
+		return Input.is_joy_button_pressed(controller_id, JOY_XBOX_B) or Input.is_joy_button_pressed(controller_id, JOY_XBOX_A)
+	return false
 
 
 func _get_horz_move_input()-> float:
-	if controller_id != -1:
-		return Input.get_joy_axis(controller_id, JOY_ANALOG_LX)
-	else:
+	if controller_id == -1:
 		return float(Input.is_action_pressed("d")) -  float(Input.is_action_pressed("a"))
+	elif controller_id == -2:
+		return float(Input.is_action_pressed("ui_right")) -  float(Input.is_action_pressed("ui_left"))
+	elif controller_id != -1:
+		return Input.get_joy_axis(controller_id, JOY_ANALOG_LX)
+	return 0.0
 
 
 func set_animation(anim_state: int):

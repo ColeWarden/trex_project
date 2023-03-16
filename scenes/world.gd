@@ -16,6 +16,7 @@ onready var ySort: YSort = $YSort
 onready var animationPlayer: AnimationPlayer = $CanvasLayer/AnimationPlayer
 
 func _ready() -> void:
+#	$CollisionMap.visible = false;
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	devices = Input.get_connected_joypads()
 	devices.resize(2)

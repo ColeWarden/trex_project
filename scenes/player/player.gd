@@ -130,7 +130,7 @@ func _get_jump_input()-> bool:
 	if controller_id == -1:
 		return Input.is_action_pressed("space") or Input.is_action_pressed("w")
 	elif controller_id == -2:
-		return Input.is_action_pressed("enter")
+		return Input.is_action_pressed("enter") or Input.is_action_pressed("ui_up")
 	elif controller_id != -1:
 		return Input.is_joy_button_pressed(controller_id, JOY_XBOX_B) or Input.is_joy_button_pressed(controller_id, JOY_XBOX_A)
 	return false
@@ -163,7 +163,7 @@ func set_animation(anim_state: int):
 func _die()-> void:
 	set_animation(ANIM.DEATH)
 	$Honk.play()
-	$Ascend.play()
+#	$Ascend.play()
 
 
 func _ghost()-> void:

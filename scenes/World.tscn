@@ -1421,6 +1421,8 @@ layer = -1
 [node name="BG_Music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 17 )
+volume_db = -15.731
+autoplay = true
 
 [node name="CooldownDeath" type="Timer" parent="."]
 

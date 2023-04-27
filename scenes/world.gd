@@ -22,6 +22,7 @@ func start_game():
 	set_player_pause_mode(Node.PAUSE_MODE_INHERIT)
 
 func _ready() -> void:
+#	$CollisionMap.visible = false;
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	devices = Input.get_connected_joypads()
 	devices.resize(2)

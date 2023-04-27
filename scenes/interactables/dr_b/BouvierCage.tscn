@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/interactables/dr_b/BouvierCage.gd" type="Script" id=1]
 [ext_resource path="res://resources/enviroment/cage.png" type="Texture" id=2]
@@ -88,7 +88,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "default"
-length = 50.0
+length = 18.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
@@ -132,11 +132,14 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 10.7 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 10.7, 18 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "bouvier_dance"
+}, {
+"args": [  ],
+"method": "show_credits"
 } ]
 }
 tracks/4/type = "value"
@@ -176,6 +179,13 @@ tracks/6/keys = {
 "values": [ Vector2( 0, 360 ), Vector2( 0, 360 ), Vector2( 0, 328 ) ]
 }
 
+[sub_resource type="Curve" id=11]
+min_value = -1.0
+_data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 0.230769, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.51282, -1 ), 0.0, 0.0, 0, 0, Vector2( 0.722222, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, -1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
+
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.132479, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.820513, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
@@ -200,12 +210,14 @@ initial_velocity = 50.0
 initial_velocity_random = 0.35
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+radial_accel = 4.72
 scale = 5.0
 scale_random = 0.5
 scale_curve = SubResource( 5 )
-color = Color( 1, 0, 0, 1 )
+color = Color( 1, 0.14902, 0.00784314, 1 )
 hue_variation = 1.0
 hue_variation_random = 1.0
+hue_variation_curve = SubResource( 12 )
 
 [node name="BouvierCage" type="Node2D"]
 position = Vector2( 323, 69 )
@@ -251,9 +263,9 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 margin_left = 222.0
-margin_top = 148.0
+margin_top = 238.0
 margin_right = 422.0
-margin_bottom = 176.0
+margin_bottom = 266.0
 rect_pivot_offset = Vector2( 100, 14 )
 theme = ExtResource( 5 )
 text = "You saved Dr. Bouvier!"

@@ -22,4 +22,4 @@ func _physics_process(_delta: float):
 		animationSprite.flip_h = direction.x > 0
 		velocity = direction * 25
 	velocity.y += 20.0 * _delta
-	move_and_slide(velocity, Vector2.UP)
+	var _e = move_and_slide(velocity, Vector2.UP)

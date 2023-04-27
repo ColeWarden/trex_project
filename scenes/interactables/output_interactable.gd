@@ -37,7 +37,7 @@ func get_input_interactables(group_name: String)-> Array:
 
 
 # Takes in an area node (preferably a interact.tscn node)
-func _is_player(area: Area2D)-> bool:
+func _is_player(_area: Area2D)-> bool:
 	return true
 	#return area.get_parent() is Player
 
@@ -60,8 +60,8 @@ func _draw():
 		for input in inputs:
 			var local_pos: Vector2 = input.global_position - global_position
 			var local_mid_pos: Vector2 = local_pos / 2.0
-			var lines = PoolVector2Array([local_pos, local_mid_pos])
-			var colors = PoolColorArray([Color.red, Color.green])
+			#var lines = PoolVector2Array([local_pos, local_mid_pos])
+			#var colors = PoolColorArray([Color.red, Color.green])
 			var width: float = 2.0
 			draw_line(Vector2.ZERO, local_mid_pos, Color.red, width)
 			draw_line(local_mid_pos, local_pos, Color.green, width)

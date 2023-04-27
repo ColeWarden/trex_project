@@ -12,7 +12,7 @@ func interact_area_entered(area: Area2D) -> void:
 		set_active(lever_flip)
 
 # Override
-func interact_area_exited(area: Area2D) -> void:
+func interact_area_exited(_area: Area2D) -> void:
 	pass
 
 func set_active(value)-> void:

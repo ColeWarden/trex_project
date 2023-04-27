@@ -1,7 +1,7 @@
 extends InputInteractable
 
 onready var drB: Sprite = $Sprite/DrB
-onready var drawNode2D: Node2D = $CanvasLayer/Node2D
+#onready var drawNode2D: Node2D = $CanvasLayer/Node2D
 var active: bool = false
 var win_screen: bool = false
 var width: float = 64.0
@@ -14,7 +14,7 @@ func receive_active(_value)-> void:
 	$AnimationPlayer.play("default")
 
 
-func set_color_mode(color: int)-> void:
+func set_color_mode(_color: int)-> void:
 	pass
 
 
@@ -37,6 +37,12 @@ func _process(delta: float) -> void:
 	s += 1.0
 	$CanvasLayer/Label.rect_scale = Vector2(s,s)
 	$CanvasLayer/Label.visible_characters += 1
+
+
+
+func show_credits():
+	var anim: AnimationPlayer = get_tree().get_nodes_in_group("animationPlayer").front()
+	anim.play("credits")
 
 
 func _on_Timer_timeout() -> void:

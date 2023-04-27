@@ -27,7 +27,7 @@ func _area_entered(area: Area2D) -> void:
 	players.append(first_player)
 	set_state(STATE.HONK)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if players.size() < 1:
 		return
 	var closest_dist: float = 100000.0
@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 	if !is_on_floor():
 		velocity.y += gravity
 	
-	move_and_slide(velocity, Vector2.UP, false)
+	var _e = move_and_slide(velocity, Vector2.UP, false)
 
 
 func set_animation(_state: int)-> void:
@@ -78,7 +78,7 @@ func face_player(closest_player)-> void:
 		$Sprite.flip_h = player_pos.x > global_position.x
 
 
-func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+func _on_AnimationPlayer_animation_finished(_anim_name: String) -> void:
 	pass
 #	print(anim_name)
 #	if anim_name == "jump_up":

@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://scenes/world.gd" type="Script" id=1]
 [ext_resource path="res://resources/collision.png" type="Texture" id=2]
@@ -650,6 +650,21 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "credits"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Credits:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=41]
@@ -1352,18 +1367,8 @@ margin_bottom = 14.0
 pause_mode = 2
 
 [node name="AnimationPlayer" parent="CanvasLayer" index="0"]
+anims/credits = SubResource( 44 )
 anims/intro = SubResource( 41 )
-
-[node name="Control" parent="CanvasLayer/Retry/HBoxContainer" index="0"]
-margin_right = 166.0
-
-[node name="Label" parent="CanvasLayer/Retry/HBoxContainer" index="1"]
-margin_left = 170.0
-margin_right = 470.0
-text = "Press 'Jump' or 'F2' to continue."
-
-[node name="Control2" parent="CanvasLayer/Retry/HBoxContainer" index="2"]
-margin_left = 474.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 modulate = Color( 1, 1, 1, 0 )
@@ -1412,6 +1417,22 @@ margin_bottom = 356.0
 rect_scale = Vector2( 0.5, 0.5 )
 theme = ExtResource( 38 )
 text = "(Press F2 to skip)"
+
+[node name="Credits" type="Label" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 141.0
+margin_top = 38.0
+margin_right = 517.0
+margin_bottom = 283.0
+theme = ExtResource( 38 )
+text = "              Credits:
+Cole Warden             David 
+Emmorie Brown          Gavin Witsken
+Justin                  Tyler Reinhardt
+                          
+
+
+"
 
 [node name="Camera2D" parent="." instance=ExtResource( 19 )]
 

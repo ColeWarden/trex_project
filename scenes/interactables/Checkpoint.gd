@@ -21,5 +21,5 @@ func get_group_nodes(group: String)-> Array:
 	return get_tree().get_nodes_in_group(group)
 
 
-func _on_HurtArea_area_entered(area: Area2D) -> void:
+func _on_HurtArea_area_entered(_area: Area2D) -> void:
 	set_current_checkpoint()

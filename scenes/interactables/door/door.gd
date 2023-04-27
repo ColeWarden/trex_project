@@ -21,7 +21,7 @@ func receive_active(value)-> void:
 	else:
 		active_count -= 1
 	for tile_pos in door_tiles:
-		print("Active count: ", active_count)
+		#print("Active count: ", active_count)
 		if value and active_count > 0:
 			collisionTileMap.remove_collision_tile(tile_pos)
 			set_sprite_mod_a(0.3)

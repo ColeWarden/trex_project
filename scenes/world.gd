@@ -8,7 +8,7 @@ enum MODE {
 const COOLDOWN_DEATH_DUR: float = 1.0
 const packedProjectile: PackedScene = preload("res://scenes/projectile/Projectile.tscn")
 
-var starting_pos: Vector2 = Vector2(100, 64)#Vector2(244*16, -66*16)## Vector2(3100, -1100)#
+var starting_pos: Vector2 = Vector2(100, 96+64)#Vector2(244*16, -66*16)## Vector2(3100, -1100)#Vector2(100, 96+64)#
 var devices: Array = []
 var mode: int = MODE.IDLE
 var cooldown_death: bool = false
@@ -42,7 +42,7 @@ func _ready() -> void:
 		else:
 			inst.set_controller_id(devices[i])
 		inst.global_position = starting_pos
-		inst.connect("die", self, "_player_died")
+		var _e = inst.connect("die", self, "_player_died")
 		players.append(inst)
 	set_player_pause_mode(Node.PAUSE_MODE_STOP)
 	$CanvasLayer/AnimationPlayer.play("intro")
@@ -91,7 +91,7 @@ func set_mode_idle()-> void:
 
 
 func set_player_pause_mode(pause: int)-> void:
-	var players: Array = get_group_nodes("player")
+	#var players: Array = get_group_nodes("player")
 	for player in players:
 		player.pause_mode = pause
 
@@ -117,14 +117,14 @@ func _get_jump_input(controller_id)-> bool:
 	return false
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("f2"):
 		#Respsawn at last checkpoint
 		reset()
 	
 	if Input.is_action_just_pressed("`"):
 		#Respsawn at last checkpoint
-		get_tree().reload_current_scene()
+		var _e = get_tree().reload_current_scene()
 	
 	if mode == MODE.RETRY:
 		if cooldown_death:
@@ -143,7 +143,6 @@ func reset()-> void:
 	mode == MODE.IDLE
 	animationPlayer.play("RESET")
 	get_tree().paused = false
-	var players: Array = get_group_nodes("player")
 	var check: Checkpoint = get_current_checkpoint()
 	var spawn_pos: Vector2 = starting_pos
 	if check:

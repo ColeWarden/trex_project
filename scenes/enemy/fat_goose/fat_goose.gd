@@ -9,7 +9,8 @@ enum STATE {
 
 const ANIMATION_STATES: Array = ["honk", "hide", "jump", "slam"]
 var state: int = STATE.HONK
-var first_player: Player = null
+var players: Array = []
+#var first_player: Player = null
 var velocity: Vector2 = Vector2.ZERO
 var gravity: float = 10.0
 var timer: int = 0
@@ -22,19 +23,29 @@ func _ready() -> void:
 
 
 func _area_entered(area: Area2D) -> void:
-	first_player = area.get_parent()
+	var first_player = area.get_parent()
+	players.append(first_player)
 	set_state(STATE.HONK)
 
 func _process(delta: float) -> void:
-	if first_player:
-		velocity.x += global_position.direction_to(first_player.global_position).normalized().x * 100.0
-		
-		velocity.x = clamp(velocity.x, -100, 100)
-		face_player()
-		if !is_on_floor():
-			velocity.y += gravity
-		
-		move_and_slide(velocity, Vector2.UP, false)
+	if players.size() < 1:
+		return
+	var closest_dist: float = 100000.0
+	var closest_player: Player = null
+	for player in players:
+		#print(players)
+		var dist = player.global_position.distance_to(global_position)
+		if closest_dist > dist:
+			closest_dist = dist
+			closest_player = player
+	velocity.x += global_position.direction_to(closest_player.global_position).normalized().x * 100.0
+	
+	velocity.x = clamp(velocity.x, -250, 250)
+	face_player(closest_player)
+	if !is_on_floor():
+		velocity.y += gravity
+	
+	move_and_slide(velocity, Vector2.UP, false)
 
 
 func set_animation(_state: int)-> void:
@@ -61,9 +72,9 @@ func set_state(new_state: int)-> void:
 #	#in_air = 10
 
 
-func face_player()-> void:
-	if first_player:
-		var player_pos: Vector2 = first_player.global_position
+func face_player(closest_player)-> void:
+	if closest_player:
+		var player_pos: Vector2 = closest_player.global_position
 		$Sprite.flip_h = player_pos.x > global_position.x
 
 
@@ -73,3 +84,8 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 #	if anim_name == "jump_up":
 #		return
 #	set_state((state + 1) % 3) + 1)
+
+
+func _on_DetectionArea_area_exited(area: Area2D) -> void:
+	var first_player = area.get_parent()
+	players.erase(first_player)

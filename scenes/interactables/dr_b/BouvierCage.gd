@@ -7,6 +7,7 @@ var win_screen: bool = false
 var width: float = 64.0
 var c: float = 0.0
 
+
 # Override
 func receive_active(_value)-> void:
 	active = true
@@ -20,14 +21,21 @@ func set_color_mode(color: int)-> void:
 func bouvier_dance()-> void:
 	$Timer.start()
 	win_screen = true
-	$Particles2D.visible = true
+	$CanvasLayer/Particles2D.emitting = true
+	$CanvasLayer/Label.rect_rotation = 0
+	
 
 
 func _process(delta: float) -> void:
 	if !win_screen:
 		return
 	c += delta
-	$CanvasLayer/Label.rect_rotation += sin(c * 10.0) * 10.0
+	#$CanvasLayer/Label.rect_rotation = 0
+	$CanvasLayer/Label.rect_rotation = sin(c * 7.0) * 5
+	var s = ((sin(c * 2.0) + 1.0) / 2.0) 
+	s /= 3
+	s += 1.0
+	$CanvasLayer/Label.rect_scale = Vector2(s,s)
 	$CanvasLayer/Label.visible_characters += 1
 
 

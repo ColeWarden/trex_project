@@ -18,6 +18,7 @@ const MAX_JUMP_VELOCITY = 8.0
 const HORZ_VELOCITY = 1.0
 const JUMP_VELOCITY = 9.0
 const DOUBLE_JUMP_COOLDOWN = 0.5
+const MAX_GHOST_Y = 150.0
 
 var controller_id: int = -1 setget set_controller_id
 var velocity: Vector2 = Vector2.ZERO
@@ -26,7 +27,7 @@ var friction: float = 30.0
 var animation_state: int = ANIM.IDLE
 var jump_button_held: bool = false
 var double_jump_ready: bool = false
-
+var max_ghost_y: float = 0.0
 onready var sprite: Sprite = $Sprite
 onready var collisionShape2D: CollisionShape2D = $CollisionShape2D
 onready var animationPlayer: AnimationPlayer = $AnimationPlayer
@@ -49,6 +50,8 @@ func set_controller_id(value: int)-> void:
 
 func _physics_process(delta: float) -> void:
 	if animation_state == ANIM.DEATH or animation_state == ANIM.GHOST:
+		if global_position.y < max_ghost_y:
+			return
 		global_position.y -= delta * 50.0
 		return
 	
@@ -168,6 +171,7 @@ func _die()-> void:
 
 func _ghost()-> void:
 	set_animation(ANIM.GHOST)
+	max_ghost_y = global_position.y - MAX_GHOST_Y
 
 
 func _area_entered(area) -> void:

@@ -889,6 +889,7 @@ texture = ExtResource( 27 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Background"]
 position = Vector2( 3125, 112 )
 frames = SubResource( 31 )
+frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Background/AnimatedSprite"]
@@ -1235,6 +1236,14 @@ shape = SubResource( 12 )
 position = Vector2( 4039, -1235 )
 input_key = "drb0"
 
+[node name="ColorRect" parent="YSort/Boss/BouvierCage/CanvasLayer" index="0"]
+margin_right = 0.0
+
+[node name="ColorRect2" parent="YSort/Boss/BouvierCage/CanvasLayer" index="1"]
+margin_top = -32.0
+margin_right = 0.0
+margin_bottom = -32.0
+
 [node name="Lever" parent="YSort/Boss" instance=ExtResource( 7 )]
 position = Vector2( 3960, -1025 )
 color_mode = 0
@@ -1419,6 +1428,7 @@ theme = ExtResource( 38 )
 text = "(Press F2 to skip)"
 
 [node name="Credits" type="Label" parent="CanvasLayer"]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 141.0
 margin_top = 38.0
@@ -1426,13 +1436,28 @@ margin_right = 517.0
 margin_bottom = 283.0
 theme = ExtResource( 38 )
 text = "              Credits:
-Cole Warden             David 
+Cole Warden             David Shimkus
 Emmorie Brown          Gavin Witsken
-Justin                  Tyler Reinhardt
+Justin  Faruq           Tyler Reinhardt
+
+
+Music: https://www.free-stock-music.com/
+glitch-orchestral-funky-hip-hop-beat.html
                           
 
 
 "
+
+[node name="DeathIncre" type="Label" parent="CanvasLayer"]
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 48.0
+theme = ExtResource( 38 )
+
+[node name="Timer" type="Label" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 14.0
+theme = ExtResource( 38 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 19 )]
 

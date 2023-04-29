@@ -43,6 +43,8 @@ func _process(delta: float) -> void:
 func show_credits():
 	var anim: AnimationPlayer = get_tree().get_nodes_in_group("animationPlayer").front()
 	anim.play("credits")
+	var world: Node2D = get_tree().get_nodes_in_group("world").front()
+	world.timer_stop()
 
 
 func _on_Timer_timeout() -> void:

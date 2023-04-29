@@ -8,7 +8,7 @@ enum MODE {
 const COOLDOWN_DEATH_DUR: float = 1.0
 const packedProjectile: PackedScene = preload("res://scenes/projectile/Projectile.tscn")
 
-var starting_pos: Vector2 = Vector2(100, 96+64)#Vector2(244*16, -66*16)## Vector2(3100, -1100)#Vector2(100, 96+64)#
+var starting_pos: Vector2 = Vector2(244*16, -66*16)#Vector2(100, 96+64)#Vector2(244*16, -66*16)## Vector2(3100, -1100)#Vector2(100, 96+64)#
 var devices: Array = []
 var mode: int = MODE.IDLE
 var cooldown_death: bool = false
@@ -17,6 +17,7 @@ onready var packedPlayer: PackedScene = preload("res://scenes/player/Player.tscn
 onready var players: Array = []
 onready var ySort: YSort = $YSort
 onready var animationPlayer: AnimationPlayer = $CanvasLayer/AnimationPlayer
+
 
 func start_game():
 	set_player_pause_mode(Node.PAUSE_MODE_INHERIT)
@@ -66,8 +67,10 @@ func create_projectile(direction: Vector2, spd: float)-> Projectile:
 	inst.set_speed(spd)
 	return inst
 
-
+var deaths: int = 0
 func _player_died(player_id: Player)-> void:
+	deaths += 1
+	$CanvasLayer/DeathIncre.text = "Deaths: " + str(deaths)
 	player_id._die()
 	set_player_pause_mode(Node.PAUSE_MODE_STOP)
 	player_id.pause_mode = Node.PAUSE_MODE_PROCESS
@@ -75,6 +78,9 @@ func _player_died(player_id: Player)-> void:
 	get_tree().paused = true
 	set_mode_retry()
 
+
+func timer_stop():
+	set_process(false)
 
 func set_mode_retry()-> void:
 	mode = MODE.RETRY
@@ -116,8 +122,11 @@ func _get_jump_input(controller_id)-> bool:
 		return Input.is_joy_button_pressed(controller_id, JOY_XBOX_B) or Input.is_joy_button_pressed(controller_id, JOY_XBOX_A)
 	return false
 
-
-func _process(_delta: float) -> void:
+var time: float = 0.0
+func _process(delta: float) -> void:
+	time += delta
+	$CanvasLayer/Timer.text = "Time: " + str(time).left((str(time).find(".")) + 3)
+	
 	if Input.is_action_just_pressed("f2"):
 		#Respsawn at last checkpoint
 		reset()

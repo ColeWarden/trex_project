@@ -24,11 +24,11 @@ func start_game():
 
 func _ready() -> void:
 #	$CollisionMap.visible = false;
-	starting_pos = Vector2(244*16, -66*16)
+	# starting_pos = Vector2(244*16, -66*16)
 	# starting_pos = Vector2(100, 96+64) 
 	# starting_pos = Vector2(244*16, -66*16)
 	# starting_pos = Vector2(3100, -1100)
-	# starting_pos = Vector2(100, 96+64) # Normal Spawn
+	starting_pos = Vector2(100, 96+64) # Normal Spawn
 
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	devices = Input.get_connected_joypads()

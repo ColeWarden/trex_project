@@ -106,6 +106,7 @@ window/stretch/aspect="keep"
 [global]
 
 force=false
+bluetooth=false
 
 [importer_defaults]
 

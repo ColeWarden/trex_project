@@ -8,7 +8,7 @@ enum MODE {
 const COOLDOWN_DEATH_DUR: float = 1.0
 const packedProjectile: PackedScene = preload("res://scenes/projectile/Projectile.tscn")
 
-var starting_pos: Vector2 = Vector2(244*16, -66*16)#Vector2(100, 96+64)#Vector2(244*16, -66*16)## Vector2(3100, -1100)#Vector2(100, 96+64)#
+var starting_pos: Vector2  
 var devices: Array = []
 var mode: int = MODE.IDLE
 var cooldown_death: bool = false
@@ -24,9 +24,16 @@ func start_game():
 
 func _ready() -> void:
 #	$CollisionMap.visible = false;
+	starting_pos = Vector2(244*16, -66*16)
+	# starting_pos = Vector2(100, 96+64) 
+	# starting_pos = Vector2(244*16, -66*16)
+	# starting_pos = Vector2(3100, -1100)
+	# starting_pos = Vector2(100, 96+64) # Normal Spawn
+
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	devices = Input.get_connected_joypads()
 	devices.resize(2)
+	
 	var keyboard_index: int = -1
 	for i in devices.size():
 		var inst: Node2D = packedPlayer.instance()
@@ -149,7 +156,7 @@ func _process(delta: float) -> void:
 
 func reset()-> void:
 	set_mode_idle()
-	mode == MODE.IDLE
+	mode = MODE.IDLE
 	animationPlayer.play("RESET")
 	get_tree().paused = false
 	var check: Checkpoint = get_current_checkpoint()
